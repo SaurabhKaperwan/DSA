@@ -1,0 +1,24 @@
+//Memoization
+#include <bits/stdc++.h> 
+
+int min_total(int i,vector<int> & heights,vector<int> & dp)
+{
+    if(i==0)
+        return 0;
+    if(dp[i]!=-1)
+        return dp[i];
+    
+    int l=min_total(i-1,heights,dp)+abs(heights[i]-heights[i-1]);
+    int r=INT_MAX;
+    if(i>1)
+        r=min_total(i-2,heights,dp)+abs(heights[i]-heights[i-2]);
+    
+    return dp[i]=min(l,r);
+
+}
+
+int frogJump(int n, vector<int> &heights)
+{
+    vector<int> dp(n+1,-1);
+    return min_total(n-1,heights,dp);    
+}
