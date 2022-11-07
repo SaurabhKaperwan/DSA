@@ -5,7 +5,7 @@ class Solution
         {
             int temp=num;
             int rem;
-            int itr=-1;
+            int itr;
             int digit=0;
             while(temp!=0)
             {
@@ -20,5 +20,3 @@ class Solution
             return num;
         }
 };
-
-
