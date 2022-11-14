@@ -1,56 +1,51 @@
-//BFS
-
 //{ Driver Code Starts
 #include <bits/stdc++.h>
 using namespace std;
 
 // } Driver Code Ends
-class Solution 
+
+//Using BFS
+
+class Solution
 {
   public:
     
-    
-    bool detect(int src,vector<int>adj[],int vis[])
+    bool detectCycle(int node,vector<int> adj[],int visit[])
     {
-        vis[src]=1;
         queue<pair<int,int>> q;
-        q.push({src,-1});
+        q.push({node,-1});
+        visit[node]=1;
         
         while(!q.empty())
         {
-            int node=q.front().first;
+            int temp=q.front().first;
             int parent=q.front().second;
             q.pop();
-            
-            for(auto adjNode : adj[node])
+            for(auto itr : adj[temp])
             {
-                if(!vis[adjNode])
+                if(!visit[itr])
                 {
-                    vis[adjNode]=1;
-                    q.push({adjNode,node});
+                    q.push({itr,temp});
+                    visit[itr]=1;
                 }
-                
-                else if(parent != adjNode)
+                else if(parent != itr)
                 {
                     return true;
                 }
             }
         }
         return false;
-        
     }
     
-    // Function to detect cycle in an undirected graph.
     bool isCycle(int V, vector<int> adj[]) 
     {
-        int vis[V]={0};
+        int visit[V]={0};
+        
         for(int i=0;i<V;i++)
         {
-            if(!vis[i])
-            {
-                if(detect(i,adj,vis))
+            if(!visit[i])
+                if(detectCycle(i,adj,visit) == true)
                     return true;
-            }
         }
         return false;
     }
