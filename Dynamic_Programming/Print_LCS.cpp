@@ -1,5 +1,5 @@
 //Printing LCS
-
+//Using Tabulation
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -63,3 +63,40 @@ int main()
 	Solution obj;
 	obj.longestCommonSubsequence("abcde","ace");
 }
+
+
+//Using Memoization
+
+class Solution 
+{
+    public:
+
+        int lcsUtil(string  &text1,string &text2,int n,int m,vector<vector<int>> &dp,string &ans)
+        {
+            if(n<0 or m<0)
+                return 0;
+
+            if(dp[n][m]!=-1)
+                return dp[n][m];
+            if(text1[n]==text2[m])
+            {
+                ans+=text1[n];
+                return dp[n][m]=1+lcsUtil(text1,text2,n-1,m-1,dp,ans);
+            }
+            
+            return dp[n][m]= max(lcsUtil(text1,text2,n-1,m,dp,ans),lcsUtil(text1,text2,n,m-1,dp,ans));
+        }
+
+        int longestCommonSubsequence(string text1, string text2) 
+        {
+            int n=text1.size();
+            int m=text2.size();
+            string ans="";
+            vector<vector<int>> dp(n,vector<int>(m,-1));
+            int len=lcsUtil(text1,text2,n-1,m-1,dp,ans);
+            reverse(ans.begin(),ans.end());
+            cout<<ans;
+            return len;
+
+        }
+};
