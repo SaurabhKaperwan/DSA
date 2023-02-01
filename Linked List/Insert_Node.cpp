@@ -16,7 +16,10 @@ typedef struct Node
 void printNodes(Node *head)
 {
 	if(head == NULL)
+	{
 		cout<<"LL is empty";
+		return;
+	}
 
 	Node *ptr = head;
 
