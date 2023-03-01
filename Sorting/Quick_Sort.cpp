@@ -1,64 +1,40 @@
-//Quick Sort 
-
-#include <iostream>
-using namespace std;
-
-void printArray(int arr[] , int size)
+class Solution 
 {
-	for (int i = 0; i < size; ++i)
-	{
-		cout<<arr[i]<<" ";
-	}
-	cout<<endl;
-}
+    public:
 
-void swap(int *a, int *b)
-{
-	int temp = *a;
-	*a = *b;
-	*b = temp;
-}
+        int quickSortUtil(vector<int>& nums, int low, int high)
+        {
+            int pivot = nums[low];
+            int i = low;
+            int j = high;
 
-int partition(int arr[], int low, int high)
-{
-	int pivot = arr[high];
-	int i = low-1;
+            while(i < j)
+            {
+                while(i <= high and nums[i] <=  pivot)
+                    i++;
+                while(j >= low and nums[j] > pivot)
+                    j--;
+                if(i < j)
+                    swap(nums[i] , nums[j]);
+            }
+            swap(nums[low] , nums[j]);
+            return j;
+        }
 
-	for(int j = low; j < high; j++)
-	{
-		if(arr[j] <= pivot)
-		{
-			i++;
-			swap(&arr[i], &arr[j]);
-		}
-	}
+        void quickSort(vector<int>& nums, int low, int high)
+        {
+            if(low < high)
+            {
+                int pivot = quickSortUtil(nums, low, high);
+                quickSort(nums, low, pivot - 1);
+                quickSort(nums, pivot + 1 , high);
+            }
+        }
 
-	swap(&arr[i+1], &arr[high]);
-
-	return i+1;
-}
-
-void quickSort(int arr[], int low, int high)
-{
-	if(low < high)
-	{
-		int pi = partition(arr, low, high);
-
-		quickSort(arr, low, pi-1);
-		quickSort(arr, pi+1, high);
-	}
-}
-
-int main()
-{
-	int arr[] = {8,7,6,1,0,9,2};
-	int n = sizeof(arr) / sizeof(arr[0]);
-
-	cout<<"Unsorted Array:\n";
-	printArray(arr, n);
-
-	quickSort(arr, 0, n-1);
-
-	cout<<"\nSorted Array:\n";
-	printArray(arr, n);
-}
+        vector<int> sortArray(vector<int>& nums) 
+        {
+            int n = nums.size();
+            quickSort(nums, 0, n-1);
+            return nums;
+        }
+};
