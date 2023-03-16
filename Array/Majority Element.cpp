@@ -24,7 +24,7 @@ class Solution
         }
 };
 
-//Using Moore's Voting Algo
+//Using Boyer - Moore's Voting Algo
 
 class Solution 
 {
