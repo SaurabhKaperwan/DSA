@@ -47,3 +47,32 @@ int main() {
 	return 0;
 }
 // } Driver Code Ends
+
+
+//Using Map
+
+long long sum = 0;
+    int maxLen = 0;
+    unordered_map<long long , int> preSum;
+
+    for(int i = 0; i < a.size(); i++)
+    {
+        sum += a[i];
+        if(sum == k)
+        {
+            maxLen = max(maxLen, i+1);
+        }
+        int rem = sum - k;
+
+        if(preSum.find(rem) != preSum.end())
+        {
+            int len = i - preSum[rem];
+            maxLen = max(maxLen, len);
+        }
+	//For this case [2,0,0,3]
+        if(preSum.find(sum) == preSum.end())
+        {
+            preSum[sum] = i;
+        }
+    }
+    return maxLen;
