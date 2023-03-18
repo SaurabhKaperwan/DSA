@@ -76,3 +76,33 @@ long long sum = 0;
         }
     }
     return maxLen;
+
+
+//Using Two Pointer
+
+#include <iostream>
+using namespace std;
+
+int longestSubArrayWithSumK(int arr[], int n, int k) {
+    int maxLength = 0, sum = 0, left = 0, right = 0;
+    while (right < n) {
+        sum += arr[right];
+        while (sum > k) {
+            sum -= arr[left];
+            left++;
+        }
+        if (sum == k) {
+            maxLength = max(maxLength, right - left + 1);
+        }
+        right++;
+    }
+    return maxLength;
+}
+
+int main() {
+    int arr[] = {2, 1, 3, 5, 6, 2, 1, 8};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int k = 10;
+    cout << "Length of the longest sub-array with sum " << k << " is: " << longestSubArrayWithSumK(arr, n, k) << endl;
+    return 0;
+}
