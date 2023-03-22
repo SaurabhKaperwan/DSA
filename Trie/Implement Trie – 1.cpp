@@ -99,23 +99,31 @@ int main()
 	vector<int>type = {1, 1, 2, 3, 2};
 	vector<string>value = {"hello", "help", "help", "hel", "hel"};
 	Trie trie;
-	for (int i = 0; i < n; i++) {
-		if (type[i] == 1) {
+	for (int i = 0; i < n; i++) 
+	{
+		if (type[i] == 1) 
+		{
 			trie.insert(value[i]);
 		}
-		else if (type[i] == 2) {
-			if (trie.search(value[i])) {
+		else if (type[i] == 2)
+		{
+			if (trie.search(value[i]))
+			{
 				cout << "true" << "\n";
 			}
-			else {
+			else 
+			{
 				cout << "false" << "\n";
 			}
 		}
-		else {
-			if (trie.startsWith(value[i])) {
+		else
+		{
+			if (trie.startsWith(value[i])) 
+			{
 				cout << "true" << "\n";
 			}
-			else {
+			else 
+			{
 				cout << "false" << "\n";
 			}
 		}
