@@ -13,7 +13,7 @@ struct Node
     {
 		links[ch - 'a'] = node;
 	}
-	//to get the next node for traversal
+	//get the next node for traversal
 	Node *get(char ch) 
     {
 		return links[ch - 'a'];
